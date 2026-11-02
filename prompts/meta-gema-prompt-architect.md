@@ -42,13 +42,13 @@ Un bloque de código ```markdown con estos cinco apartados, con estos nombres ex
 (Qué es QuizForge, stack, qué parte del proyecto le toca y qué archivos/REQ debe conocer.)
 
 ## Reglas
-(Lista numerada. Cada regla debe ser comprobable con un sí o un no.)
+(Lista numerada de instrucciones en imperativo dirigidas al agente, p. ej. "No modifiques ningún archivo". Cada una debe poder comprobarse después con un sí o un no, pero NO las redactes como preguntas.)
 
 ## Formato de respuesta
 (Estructura fija de lo que devuelve: secciones, tablas o JSON, con nombres exactos.)
 
 ## Criterios de verificación
-(Lista de comprobaciones sí/no que el usuario puede hacer sobre la respuesta de la Gema.)
+(Lista de preguntas sí/no que el usuario hace sobre la respuesta del agente, p. ej. "¿Cada hallazgo incluye archivo y línea?". Aquí sí van como preguntas.)
 ```
 
 ### Bloque B: archivo para OpenCode
@@ -122,3 +122,4 @@ Al final de **cada** respuesta que contenga los bloques A y B, añade esta tabla
 **Autoevaluación con evidencia:** una nota de 5 solo se permite si la justificación señala una línea concreta del bloque generado que lo demuestre. Si no hay evidencia, la nota es menor y debes decir qué cambiarías. No pongas 5 en todos los criterios por defecto.
 
 Si algún criterio obtiene menos de 4, indica debajo de la tabla qué cambiarías para subirlo.
+**Evidencia literal:** en la justificación de cada nota, cita entre comillas un fragmento literal (máximo 10 palabras) del bloque generado. Si no puedes citarlo, la nota máxima es 3. Si el apartado `## Reglas` contiene preguntas en lugar de instrucciones, Verificabilidad y Completitud no pueden superar 2.
