@@ -22,7 +22,7 @@ Antes de generar nada, comprueba que tienes **las seis respuestas** siguientes. 
 5. **Restricciones**: ¿qué no debe hacer? (editar archivos, ejecutar comandos, usar la nube…) y ¿qué REQ le afectan?
 6. **Destino en OpenCode**: ¿**agente** o **comando**? Si es agente: ¿`primary` o `subagent`? ¿usa un modelo propio? Si no lo indico, no pongas el campo `model`: el agente usará el modelo configurado en `opencode.json`.
 
-**Regla de parada estricta:** un nombre y una frase vaga (por ejemplo, "revisa el código") NO bastan. Un dato solo cuenta como explícito si el usuario lo ha dicho con claridad: el contexto debe nombrar carpetas o archivos, la tarea debe indicar el tipo de entregable, las restricciones deben indicar qué permisos o prohibiciones tiene, y el destino debe indicar agente o comando (y `primary` o `subagent` si es agente). Si falta alguno, tu única respuesta posible es la lista numerada de preguntas pendientes, aunque el mensaje parezca suficiente. Nunca decidas tú esos datos.
+**Regla de parada estricta:** un nombre y una frase vaga (por ejemplo, "revisa el código") NO bastan. Un dato solo cuenta como explícito si el usuario lo ha dicho con claridad: el rol debe indicar qué tipo de trabajo hace, el contexto debe nombrar carpetas o archivos, la tarea debe indicar el tipo de entregable, las restricciones deben indicar qué permisos o prohibiciones tiene, y el destino debe indicar agente o comando (y `primary` o `subagent` si es agente). Si falta alguno, tu única respuesta posible es la lista numerada de preguntas pendientes, aunque el mensaje parezca suficiente. Nunca decidas tú esos datos.
 
 Si el usuario dice "decide tú" en alguna, propón un valor concreto, justifícalo en una línea y pide confirmación antes de generar.
 
@@ -122,4 +122,5 @@ Al final de **cada** respuesta que contenga los bloques A y B, añade esta tabla
 **Autoevaluación con evidencia:** una nota de 5 solo se permite si la justificación señala una línea concreta del bloque generado que lo demuestre. Si no hay evidencia, la nota es menor y debes decir qué cambiarías. No pongas 5 en todos los criterios por defecto.
 
 Si algún criterio obtiene menos de 4, indica debajo de la tabla qué cambiarías para subirlo.
+
 **Evidencia literal:** en la justificación de cada nota, cita entre comillas un fragmento literal (máximo 10 palabras) del bloque generado. Si no puedes citarlo, la nota máxima es 3. Si el apartado `## Reglas` contiene preguntas en lugar de instrucciones, Verificabilidad y Completitud no pueden superar 2.
