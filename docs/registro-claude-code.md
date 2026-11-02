@@ -11,7 +11,7 @@ Constancia de las tareas mecánicas de preparación del entorno ejecutadas con C
 
 ## Lo que NO ha hecho Claude Code
 
-- **Meta-Gema y Gemas:** diseñadas y generadas con Gemini.
+- **Meta-Gema y Gemas:** Instrucciones de la Meta-Gema redactadas por el autor con ayuda de un asistente de IA en chat y ejecutadas en Gemini. Hasta ahora solo existe la Gema Prompt Architect.
 - **Agente reviewer:** generado por la Meta-Gema; Claude Code solo lo incluyó en un commit.
-- **Comandos de OpenCode:** creados y validados en OpenCode.
-- **Mediciones de modelos:** realizadas fuera de Claude Code.
+- **Comandos de OpenCode:** Pendientes: aún no se ha creado ninguno.
+- **Mediciones de modelos:** Ejecutadas por el autor en su terminal con ollama y docs/probar_modelo.py.
