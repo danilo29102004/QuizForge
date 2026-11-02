@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>QuizForge</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="min-h-screen bg-slate-100 text-slate-900">
+    <main class="mx-auto max-w-3xl px-4 py-10">
+      <header class="mb-6">
+        <h1 class="text-3xl font-bold tracking-tight">QuizForge</h1>
+        <p class="mt-2 text-slate-600">
+          Pega tus apuntes y genera un cuestionario tipo test de 5 preguntas.
+        </p>
+      </header>
+
+      <section class="rounded-xl bg-white p-5 shadow-sm">
+        <label for="notes" class="block text-sm font-semibold">
+          Apuntes
+        </label>
+        <p class="mt-1 text-sm text-slate-500">
+          Entre 300 y 3.000 palabras.
+        </p>
+        <textarea
+          id="notes"
+          rows="12"
+          class="mt-3 w-full resize-y rounded-lg border border-slate-300 p-3 text-sm outline-none focus:border-slate-500"
+          placeholder="Pega aquí tus apuntes..."
+        ></textarea>
+
+        <div class="mt-4 flex flex-wrap gap-3">
+          <button
+            id="generate"
+            type="button"
+            class="rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-700 disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            Generar cuestionario
+          </button>
+          <button
+            id="cancel"
+            type="button"
+            class="hidden rounded-lg border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50"
+          >
+            Cancelar
+          </button>
+        </div>
+      </section>
+
+      <div
+        id="progress"
+        class="mt-5 hidden items-center gap-3 rounded-xl bg-white p-4 shadow-sm"
+        role="status"
+        aria-live="polite"
+      >
+        <span
+          class="h-5 w-5 animate-spin rounded-full border-2 border-slate-300 border-t-slate-900"
+          aria-hidden="true"
+        ></span>
+        <span id="progress-text" class="text-sm text-slate-600">
+          Generando cuestionario...
+        </span>
+      </div>
+
+      <p
+        id="message"
+        class="mt-5 hidden rounded-xl p-4 text-sm"
+        role="alert"
+      ></p>
+
+      <section id="quiz-section" class="mt-6 hidden">
+        <form id="quiz-form">
+          <div id="questions" class="space-y-4"></div>
+          <button
+            id="score"
+            type="submit"
+            class="mt-5 rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-500 disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            Corregir
+          </button>
+        </form>
+      </section>
+
+      <section
+        id="results"
+        class="mt-6 hidden rounded-xl bg-white p-5 shadow-sm"
+        aria-live="polite"
+      >
+        <h2 class="text-xl font-bold">Resultado</h2>
+        <p id="score-text" class="mt-2 text-2xl font-bold text-emerald-700"></p>
+        <ul id="failures" class="mt-4 space-y-3"></ul>
+      </section>
+    </main>
+
+    <script src="/app.js" defer></script>
+  </body>
+</html>
