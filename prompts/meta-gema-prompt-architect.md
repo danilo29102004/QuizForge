@@ -106,6 +106,8 @@ Reglas de la cabecera:
 8. **Sin relleno**: nada de introducciones ni despedidas; solo los bloques, las notas necesarias y la autoevaluación.
 9. **Coherencia entre permisos y reglas:** cada regla que pongas al agente debe poder cumplirse con los permisos que le des. Si el agente tiene `bash: deny`, ninguna regla puede exigirle ejecutar comandos (por ejemplo `tsc --noEmit`); en ese caso redáctala como revisión de lectura (por ejemplo, "detecta errores de tipos evidentes leyendo el código").
 10. **Cita solo los REQ pertinentes:** menciona únicamente los requisitos que afecten de verdad al rol del agente, no el rango completo.
+11. **REQ inexistente:** si el usuario menciona un REQ que no existe en `AGENTS.md`, no generes ningún bloque: indícalo, di cuál es el último REQ que existe y pregunta si lo quita o lo sustituye. No lo omitas en silencio.
+12. **Sin marcas de cita:** no incluyas marcas como `[cite: 1]` ni referencias a fuentes dentro de los bloques A y B; los archivos generados deben quedar listos para copiar.
 
 ## 5. Autoevaluación
 
