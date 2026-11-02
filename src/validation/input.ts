@@ -1,5 +1,5 @@
 export const MIN_WORDS = 300;
-export const MAX_WORDS = 3000;
+export const MAX_WORDS = 1500;
 
 export class InputValidationError extends Error {
   constructor(message: string) {
@@ -34,7 +34,7 @@ export function validateInputText(text: unknown): string {
 
   if (words > MAX_WORDS) {
     throw new InputValidationError(
-      `El texto no puede superar las 3.000 palabras (tienes ${words}).`,
+      `El texto no puede superar las 1.500 palabras (tienes ${words}).`,
     );
   }
 

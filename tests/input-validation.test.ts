@@ -20,13 +20,13 @@ describe("validateInputText", () => {
     expect(validateInputText(text)).toBe(makeWords(300));
   });
 
-  it("acepta un texto de exactamente 3.000 palabras", () => {
-    expect(validateInputText(makeWords(3000))).toBe(makeWords(3000));
+  it("acepta un texto de exactamente 1.500 palabras", () => {
+    expect(validateInputText(makeWords(1500))).toBe(makeWords(1500));
   });
 
-  it("rechaza un texto con más de 3.000 palabras", () => {
-    expect(() => validateInputText(makeWords(3001))).toThrow(
-      /3\.000 palabras/,
+  it("rechaza un texto con más de 1.500 palabras", () => {
+    expect(() => validateInputText(makeWords(1501))).toThrow(
+      /1\.500 palabras/,
     );
   });
 
