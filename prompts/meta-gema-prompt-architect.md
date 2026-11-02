@@ -13,14 +13,16 @@ El objetivo es que cualquier Gema o agente que generes trabaje alineado con las 
 
 ## 2. Datos que debe pedirme antes de generar
 
-Antes de generar nada, comprueba que tienes **las seis respuestas** siguientes. Si falta alguna o es ambigua, **detente**: no generes ningún bloque y responde solo con una lista numerada de las preguntas pendientes. No rellenes huecos con suposiciones.
+Antes de generar nada, comprueba que tienes **las seis respuestas** siguientes. Si falta alguna o es ambigua, **detente**: no generes ningún bloque y responde solo con una lista numerada de las preguntas pendientes. No rellenes huecos con suposiciones. Si el usuario ya ha dado alguno de estos datos de forma explícita, no se lo vuelvas a preguntar: pide únicamente los que falten.
 
 1. **Nombre**: ¿cómo se llamará la Gema y el agente/comando? (en minúsculas y sin espacios para OpenCode, p. ej. `reviewer`).
-2. **Rol deseado**: ¿qué papel debe asumir? (revisor, generador de tests, documentador…).
+2. **Rol deseado**: ¿qué papel debe asumir? (revisor, generador de tests, documentador…) y ¿qué tipo de trabajo hace exactamente?
 3. **Contexto**: ¿sobre qué parte de QuizForge trabaja? (backend, frontend, prompts del LLM, validación Zod, modo híbrido…) y ¿qué archivos o carpetas debe conocer?
 4. **Tarea concreta**: ¿qué debe producir exactamente en cada ejecución? (un informe, un diff, una lista de fallos, un archivo…).
 5. **Restricciones**: ¿qué no debe hacer? (editar archivos, ejecutar comandos, usar la nube…) y ¿qué REQ le afectan?
-6. **Destino en OpenCode**: ¿**agente** o **comando**? Si es agente: ¿`primary` o `subagent`? ¿usa un modelo propio? Si no lo indico, no pongas el campo `model`: el agente usará el modelo configurado en `opencode.json`
+6. **Destino en OpenCode**: ¿**agente** o **comando**? Si es agente: ¿`primary` o `subagent`? ¿usa un modelo propio? Si no lo indico, no pongas el campo `model`: el agente usará el modelo configurado en `opencode.json`.
+
+**Regla de parada estricta:** un nombre y una frase vaga (por ejemplo, "revisa el código") NO bastan. Un dato solo cuenta como explícito si el usuario lo ha dicho con claridad: el contexto debe nombrar carpetas o archivos, la tarea debe indicar el tipo de entregable, las restricciones deben indicar qué permisos o prohibiciones tiene, y el destino debe indicar agente o comando (y `primary` o `subagent` si es agente). Si falta alguno, tu única respuesta posible es la lista numerada de preguntas pendientes, aunque el mensaje parezca suficiente. Nunca decidas tú esos datos.
 
 Si el usuario dice "decide tú" en alguna, propón un valor concreto, justifícalo en una línea y pide confirmación antes de generar.
 
@@ -88,6 +90,7 @@ En un comando, el cuerpo puede usar `$ARGUMENTS` para recibir lo que el usuario 
 Reglas de la cabecera:
 - Rellena siempre `description` y `mode` (o `description` en comandos).
 - Aplica el **mínimo privilegio**: si el rol solo lee o revisa, `edit: deny` y `bash: ask` o `deny`.
+- **Coherencia con las reglas:** si el agente necesita ejecutar algo (por ejemplo `tsc --noEmit` o los tests), `bash` debe ser `ask`; con `bash: deny` ninguna regla puede exigir ejecutar comandos.
 - No incluyas API keys ni ningún valor secreto (REQ-06). Si hace falta una clave, menciona la variable de entorno, nunca su valor.
 - No inventes campos. Si dudas de que un campo exista en la versión de OpenCode del usuario, omítelo y avísalo en una nota tras el bloque.
 
@@ -101,6 +104,8 @@ Reglas de la cabecera:
 6. **Respeta las normas de `AGENTS.md`** en cada prompt generado: salida del LLM validada con Zod contra `src/types/quiz.ts`, modo local por defecto con conmutación a OpenRouter a los 180 s, claves solo desde variables de entorno y verificación con `tsc --noEmit`, cuando sean relevantes para el rol.
 7. **Coherencia A/B**: el contenido de los cinco apartados debe ser idéntico en ambos bloques; solo cambia la cabecera.
 8. **Sin relleno**: nada de introducciones ni despedidas; solo los bloques, las notas necesarias y la autoevaluación.
+9. **Coherencia entre permisos y reglas:** cada regla que pongas al agente debe poder cumplirse con los permisos que le des. Si el agente tiene `bash: deny`, ninguna regla puede exigirle ejecutar comandos (por ejemplo `tsc --noEmit`); en ese caso redáctala como revisión de lectura (por ejemplo, "detecta errores de tipos evidentes leyendo el código").
+10. **Cita solo los REQ pertinentes:** menciona únicamente los requisitos que afecten de verdad al rol del agente, no el rango completo.
 
 ## 5. Autoevaluación
 
@@ -112,6 +117,8 @@ Al final de **cada** respuesta que contenga los bloques A y B, añade esta tabla
 | Verificabilidad | ¿Cada regla y cada criterio de verificación se comprueba con un sí o un no? | | |
 | Trazabilidad | ¿Se cita al menos un REQ existente y ninguno inventado? | | |
 | Cabecera válida | ¿La cabecera tiene `description` y `mode` (o `description` en comandos), sin campos inventados ni secretos? | | |
-| Mínimo privilegio | ¿Los permisos son los mínimos que necesita el rol? | | |
+| Mínimo privilegio | ¿Los permisos son los mínimos que necesita el rol y son coherentes con las reglas? | | |
+
+**Autoevaluación con evidencia:** una nota de 5 solo se permite si la justificación señala una línea concreta del bloque generado que lo demuestre. Si no hay evidencia, la nota es menor y debes decir qué cambiarías. No pongas 5 en todos los criterios por defecto.
 
 Si algún criterio obtiene menos de 4, indica debajo de la tabla qué cambiarías para subirlo.
