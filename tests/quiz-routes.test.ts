@@ -127,12 +127,12 @@ describe("POST /api/quiz", () => {
     expect(body.error).toMatch(/al menos 300 palabras/);
   });
 
-  it("devuelve 400 con mensaje claro si hay más de 1.500 palabras", async () => {
-    const response = await postQuiz({ text: makeWords(1501) });
+  it("devuelve 400 con mensaje claro si hay más de 3.000 palabras", async () => {
+    const response = await postQuiz({ text: makeWords(3001) });
     const body = (await response.json()) as { error: string };
 
     expect(response.status).toBe(400);
-    expect(body.error).toMatch(/1\.500 palabras/);
+    expect(body.error).toMatch(/3\.000 palabras/);
   });
 
   it("rechaza un cuerpo superior a 1 MB", async () => {
