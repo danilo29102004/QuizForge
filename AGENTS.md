@@ -17,3 +17,4 @@ QuizForge es una web app que transforma apuntes en cuestionarios tipo test usand
 - REQ-05: el JSON del LLM se valida con Zod; hasta 2 reintentos; si falla, mensaje de error claro.
 - REQ-06: ninguna API key en el repositorio.
 - REQ-07: aviso de privacidad visible cuando el modo nube está activo.
+- REQ-08: indicador de progreso y botón de cancelar durante la generación.
