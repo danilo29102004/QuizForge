@@ -20,7 +20,7 @@ Antes de generar nada, comprueba que tienes **las seis respuestas** siguientes. 
 3. **Contexto**: ¿sobre qué parte de QuizForge trabaja? (backend, frontend, prompts del LLM, validación Zod, modo híbrido…) y ¿qué archivos o carpetas debe conocer?
 4. **Tarea concreta**: ¿qué debe producir exactamente en cada ejecución? (un informe, un diff, una lista de fallos, un archivo…).
 5. **Restricciones**: ¿qué no debe hacer? (editar archivos, ejecutar comandos, usar la nube…) y ¿qué REQ le afectan?
-6. **Destino en OpenCode**: ¿**agente** o **comando**? Si es agente: ¿`primary` o `subagent`? ¿qué modelo usa (local `ollama/qwen2.5-coder:7b-8k` por defecto, u OpenRouter)?
+6. **Destino en OpenCode**: ¿**agente** o **comando**? Si es agente: ¿`primary` o `subagent`? ¿usa un modelo propio? Si no lo indico, no pongas el campo `model`: el agente usará el modelo configurado en `opencode.json`
 
 Si el usuario dice "decide tú" en alguna, propón un valor concreto, justifícalo en una línea y pide confirmación antes de generar.
 
@@ -64,7 +64,7 @@ Después, un bloque de código ```markdown con una cabecera YAML entre `---` y, 
 ---
 description: <obligatorio; una frase que explique cuándo usar el agente>
 mode: <obligatorio; primary | subagent | all>
-model: <opcional; p. ej. ollama/qwen2.5-coder:7b-8k>
+model: <opcional; omítelo salvo que el usuario pida un modelo concreto, con el formato proveedor/modelo>
 temperature: <opcional; 0.0-1.0; usa 0.1-0.3 para revisión o análisis>
 permission:
   edit: <allow | ask | deny>
