@@ -23,3 +23,9 @@ export const QuizSchema = z.object({
   questions: z.array(QuestionSchema).length(5),
 });
 export type Quiz = z.infer<typeof QuizSchema>;
+
+export const ScoreRequestSchema = z.object({
+  id: z.string().min(1),
+  answers: z.array(OptionLetterSchema.nullable()).max(5),
+});
+export type ScoreRequest = z.infer<typeof ScoreRequestSchema>;

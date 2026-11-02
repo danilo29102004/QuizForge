@@ -37,6 +37,20 @@ interface QuizResponse {
   }>;
 }
 
+interface ScoreResponse {
+  score: string;
+  correctCount: number;
+  total: number;
+  failed: Array<{
+    position: number;
+    question: string;
+    selected: string | null;
+    correct: string;
+    explanation: string;
+  }>;
+  questions?: unknown;
+}
+
 const app = createApp({
   generateQuiz: (text, options) =>
     generateQuiz(text, {
@@ -71,12 +85,16 @@ afterAll(async () => {
   });
 });
 
-async function postQuiz(body: unknown): Promise<Response> {
-  return fetch(`${baseUrl}/api/quiz`, {
+async function postJson(path: string, body: unknown): Promise<Response> {
+  return fetch(`${baseUrl}${path}`, {
     method: "POST",
     headers: { "content-type": "application/json" },
     body: JSON.stringify(body),
   });
+}
+
+async function postQuiz(body: unknown): Promise<Response> {
+  return postJson("/api/quiz", body);
 }
 
 describe("POST /api/quiz", () => {
@@ -121,5 +139,51 @@ describe("POST /api/quiz", () => {
     const response = await postQuiz({ text: "x".repeat(1_100_000) });
 
     expect(response.status).toBe(413);
+  });
+});
+
+describe("POST /api/score", () => {
+  it("puntúa un cuestionario y no devuelve el quiz completo", async () => {
+    const quizResponse = await postQuiz({ text: makeWords(300) });
+    const { id } = (await quizResponse.json()) as QuizResponse;
+
+    const response = await postJson("/api/score", {
+      id,
+      answers: ["A", "A", "B", "B", "A"],
+    });
+    const body = (await response.json()) as ScoreResponse;
+
+    expect(response.status).toBe(200);
+    expect(body.score).toBe("3/5 (60 %)");
+    expect(body.correctCount).toBe(3);
+    expect(body.total).toBe(5);
+    expect(body.failed).toHaveLength(2);
+    expect(body.failed[0]).toMatchObject({
+      position: 3,
+      selected: "B",
+      correct: "A",
+      explanation: "Explicación 3",
+    });
+    expect(body).not.toHaveProperty("questions");
+  });
+
+  it("devuelve 404 si el quiz no existe", async () => {
+    const response = await postJson("/api/score", {
+      id: "no-existe",
+      answers: ["A", "B", "C", "D", "A"],
+    });
+    const body = (await response.json()) as { error: string };
+
+    expect(response.status).toBe(404);
+    expect(body.error).toMatch(/no existe/);
+  });
+
+  it("devuelve 400 si las respuestas no son válidas", async () => {
+    const response = await postJson("/api/score", {
+      id: "cualquiera",
+      answers: ["Z"],
+    });
+
+    expect(response.status).toBe(400);
   });
 });
