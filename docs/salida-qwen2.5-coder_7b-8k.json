@@ -1,0 +1,59 @@
+{
+  "questions": [
+    {
+      "question": "¿Qué lenguaje de programación es TypeScript?",
+      "options": {
+        "A": "Java",
+        "B": "JavaScript",
+        "C": "TypeScript",
+        "D": "Python"
+      },
+      "correct": "C",
+      "explanation": "TypeScript es un lenguaje de programación desarrollado por Microsoft."
+    },
+    {
+      "question": "¿Cuál es la principal diferencia entre TypeScript y JavaScript?",
+      "options": {
+        "A": "TypeScript no tiene un sistema de tipos estático.",
+        "B": "TypeScript es más rápido que JavaScript.",
+        "C": "TypeScript añade un sistema de tipos estático a JavaScript.",
+        "D": "TypeScript es un lenguaje de scripting."
+      },
+      "correct": "C",
+      "explanation": "TypeScript añade un sistema de tipos estático a JavaScript."
+    },
+    {
+      "question": "¿Qué tipo de dato se usa para describir la longitud fija de arrays en TypeScript?",
+      "options": {
+        "A": "tuple",
+        "B": "array",
+        "C": "length",
+        "D": "fixedArray"
+      },
+      "correct": "A",
+      "explanation": "Las tuplas en TypeScript son arrays de longitud fija con tipos distintos en cada posición."
+    },
+    {
+      "question": "¿Qué tipo de dato se usa para permitir múltiples tipos en una variable en TypeScript?",
+      "options": {
+        "A": "any",
+        "B": "unknown",
+        "C": "union",
+        "D": "all"
+      },
+      "correct": "C",
+      "explanation": "Los tipos unión, como string | number, permiten que un valor tenga uno de varios tipos."
+    },
+    {
+      "question": "¿Qué comando se usa para verificar el código de TypeScript sin generar archivos JavaScript?",
+      "options": {
+        "A": "tsc --noEmit",
+        "B": "tsc --run",
+        "C": "tsc --check",
+        "D": "tsc --compile"
+      },
+      "correct": "A",
+      "explanation": "El comando tsc --noEmit comprueba los tipos sin generar archivos JavaScript."
+    }
+  ]
+}
