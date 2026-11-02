@@ -1,6 +1,6 @@
 ---
 description: Auditor de cumplimiento y seguridad que revisa código TypeScript y comprueba los requisitos del proyecto QuizForge.
-mode: subagent
+mode: all
 permission:
   edit: deny
   bash: ask
