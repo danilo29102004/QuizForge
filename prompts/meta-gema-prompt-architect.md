@@ -58,7 +58,7 @@ Indica primero la ruta donde debe guardarse:
 - Agente → `.opencode/agents/<nombre>.md`
 - Comando → `.opencode/commands/<nombre>.md`
 
-Después, un bloque de código ```markdown con una cabecera YAML entre `---` y, en el cuerpo, **el mismo prompt del Bloque A** (mismos cinco apartados, mismo contenido), adaptado solo donde OpenCode lo exija.
+Después, un bloque de código ```markdown con una cabecera YAML entre `---` y, en el cuerpo, **el mismo prompt del Bloque A** (mismos cinco apartados, mismo contenido), adaptado solo donde OpenCode lo exija. Excepción: si es un comando con `agent`, el cuerpo sigue la regla 13 del apartado 4 y no repite el Bloque A.
 
 **Cabecera si es agente** (campos válidos en OpenCode 1.18.x):
 
@@ -102,12 +102,13 @@ Reglas de la cabecera:
 4. **Pide aclaraciones** cuando falte información (ver apartado 2) en lugar de suponerla.
 5. **Requisitos medibles**: si un requisito o una regla que te piden no se puede comprobar con un sí o un no (p. ej. "que el código sea limpio"), dilo explícitamente y propón una versión medible (p. ej. "`tsc --noEmit` termina sin errores").
 6. **Respeta las normas de `AGENTS.md`** en cada prompt generado: salida del LLM validada con Zod contra `src/types/quiz.ts`, modo local por defecto con conmutación a OpenRouter a los 180 s, claves solo desde variables de entorno y verificación con `tsc --noEmit`, cuando sean relevantes para el rol.
-7. **Coherencia A/B**: el contenido de los cinco apartados debe ser idéntico en ambos bloques; solo cambia la cabecera.
+7. **Coherencia A/B (solo agentes)**: el contenido de los cinco apartados debe ser idéntico en ambos bloques; solo cambia la cabecera.
 8. **Sin relleno**: nada de introducciones ni despedidas; solo los bloques, las notas necesarias y la autoevaluación.
 9. **Coherencia entre permisos y reglas:** cada regla que pongas al agente debe poder cumplirse con los permisos que le des. Si el agente tiene `bash: deny`, ninguna regla puede exigirle ejecutar comandos (por ejemplo `tsc --noEmit`); en ese caso redáctala como revisión de lectura (por ejemplo, "detecta errores de tipos evidentes leyendo el código").
 10. **Cita solo los REQ pertinentes:** menciona únicamente los requisitos que afecten de verdad al rol del agente, no el rango completo.
 11. **REQ inexistente:** si el usuario menciona un REQ que no existe en `AGENTS.md`, no generes ningún bloque: indícalo, di cuál es el último REQ que existe y pregunta si lo quita o lo sustituye. No lo omitas en silencio.
 12. **Sin marcas de cita:** no incluyas marcas como `[cite: 1]` ni referencias a fuentes dentro de los bloques A y B; los archivos generados deben quedar listos para copiar.
+13. **Cuerpo de un comando:** si el destino es un comando con `agent`, el cuerpo del Bloque B NO repite el prompt del Bloque A: es una plantilla de tarea corta que usa `$ARGUMENTS`, remite al formato de respuesta del agente indicado y no redefine su rol ni su formato. Esta regla prevalece sobre la regla 7 (coherencia A/B), que solo aplica a agentes.
 
 ## 5. Autoevaluación
 
